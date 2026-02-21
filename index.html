@@ -22,6 +22,7 @@
         }
 
         :root {
+            /* מצב כהה (ברירת מחדל) */
             --primary-bg: #0a0a0a;
             --secondary-bg: #141414;
             --card-bg: #1a1a1a;
@@ -34,6 +35,24 @@
             --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --header-bg: rgba(10, 10, 10, 0.95);
+            --h1-gradient: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+            --shadow-heavy: 0 15px 35px rgba(0, 0, 0, 0.8);
+        }
+
+        /* החלפה למצב בהיר אם זו הגדרת המערכת של המשתמש */
+        @media (prefers-color-scheme: light) {
+            :root {
+                --primary-bg: #f8fafc;
+                --secondary-bg: #ffffff;
+                --card-bg: #ffffff;
+                --text-primary: #0f172a;
+                --text-secondary: #475569;
+                --border-color: #e2e8f0;
+                --header-bg: rgba(255, 255, 255, 0.95);
+                --h1-gradient: linear-gradient(135deg, #0f172a 0%, #475569 100%);
+                --shadow-heavy: 0 15px 35px rgba(0, 0, 0, 0.1);
+            }
         }
 
         body {
@@ -41,6 +60,7 @@
             background: var(--primary-bg);
             color: var(--text-primary);
             line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Header */
@@ -50,12 +70,13 @@
             left: 0;
             right: 0;
             width: 100%;
-            background: rgba(10, 10, 10, 0.95);
+            background: var(--header-bg);
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 1px solid var(--border-color);
             -webkit-transform: translateZ(0);
             transform: translateZ(0);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         nav {
@@ -114,12 +135,13 @@
 
         .btn-secondary {
             background: transparent;
-            color: white;
+            color: var(--text-primary);
             border: 2px solid var(--accent-blue);
         }
 
         .btn-secondary:hover {
             background: var(--accent-blue);
+            color: #ffffff;
             transform: translateY(-2px);
         }
 
@@ -146,7 +168,7 @@
             background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
             pointer-events: none;
             z-index: 0;
-            max-width: 100vw; /* מונע מהרקע לפרוץ את המסך */
+            max-width: 100vw;
         }
 
         .hero-content {
@@ -177,7 +199,7 @@
             font-weight: 900;
             line-height: 1.2;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+            background: var(--h1-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -209,6 +231,7 @@
             padding: 3rem 1.5rem;
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .trust-content {
@@ -337,24 +360,21 @@
         }
 
         .feature-card {
-    background: var(--card-bg);
-    padding: 2.5rem;
-    border-radius: 16px;
-    border: 1px solid var(--border-color);
-    /* שדרגנו את האנימציה שתהיה חלקה יותר */
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-    position: relative;
-    z-index: 1;
-}
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            position: relative;
+            z-index: 1;
+        }
 
-.feature-card:hover {
-    transform: translateY(-8px);
-    /* מסגרת מוארת קלות בצבעי המותג */
-    border-color: rgba(139, 92, 246, 0.5); 
-    /* צל שחור עמוק למטה + זוהר צבעוני עדין מסביב */
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(139, 92, 246, 0.15);
-    z-index: 2;
-}
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139, 92, 246, 0.5); 
+            box-shadow: var(--shadow-heavy), 0 0 25px rgba(139, 92, 246, 0.15);
+            z-index: 2;
+        }
 
         .feature-icon {
             font-size: 3rem;
@@ -906,7 +926,6 @@
                 font-size: 0.9rem;
             }
 
-            /* מסתיר את המילה "עכשיו" בנייד כדי לחסוך מקום */
             .desktop-text { display: none; }
             .mobile-text { display: inline; }
 
@@ -1277,7 +1296,7 @@
             </div>
 
             <div class="included-list">
-                <div style="padding: 1rem 0; font-weight: 700; font-size: 1.2rem; border-bottom: 2px solid var(--accent-blue);">
+                <div style="padding: 1rem 0; font-weight: 700; font-size: 1.2rem; border-bottom: 2px solid var(--border-color);">
                     מה כלול:
                 </div>
                 <div>
