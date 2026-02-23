@@ -872,16 +872,21 @@
                 display: block;
                 position: fixed;
                 bottom: 20px;
-                left: 20px; /* הצמדה לצד שמאל במקום למרכז */
+                right: 20px; /* הצמדה לצד ימין */
                 z-index: 999;
                 animation: slideUp 0.5s ease-out forwards;
             }
 
             .mobile-sticky-wrapper .btn {
-                padding: 0.8rem 1.5rem;
-                font-size: 1rem;
-                border-radius: 50px; /* הופך את הכפתור לצורת גלולה (Pill) */
+                width: 60px; /* רוחב קבוע לעיגול מושלם */
+                height: 60px; /* גובה קבוע לעיגול מושלם */
+                padding: 0; /* ביטול הריווח הפנימי הרגיל */
+                font-size: 1.8rem; /* הגדלת האייקון */
+                border-radius: 50%; /* הופך את הכפתור לעיגול */
                 box-shadow: 0 10px 25px rgba(102, 126, 234, 0.6);
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
 
@@ -1316,7 +1321,7 @@
     </footer>
 
     <div class="mobile-sticky-wrapper">
-        <a href="#form" class="btn btn-primary">לשריון מקום עכשיו 🚀</a>
+        <a href="#form" class="btn btn-primary" aria-label="לשריון מקום עכשיו">🎟️</a>
     </div>
 
     <script>
