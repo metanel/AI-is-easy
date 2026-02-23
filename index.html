@@ -660,20 +660,15 @@
             text-align: center;
         }
 
+        /* ----- עיצוב חדש לטופס המוטמע ----- */
         .form-container {
             background: var(--card-bg);
-            border: 2px dashed var(--border-color);
+            border: 1px solid var(--border-color); /* שונה ממסגרת מקווקוות למסגרת נקייה */
             border-radius: 16px;
-            padding: 3rem;
+            padding: 1.5rem; /* הוקטן כדי שהטופס יתפוס יותר מקום */
             margin: 3rem 0;
             overflow: hidden;
-        }
-
-        .form-placeholder {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.8;
-            word-wrap: break-word;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* הוספת הצללה קלה */
         }
 
         .divider {
@@ -845,7 +840,7 @@
             }
 
             .investment-box, .form-container, .solution-box {
-                padding: 1.5rem;
+                padding: 1rem; /* הוקטן עוד יותר בנייד לניצול מקום */
             }
 
             /* התאמות לנייד עבור סקשן הציטוט והתמונה - מסך מלא */
@@ -1204,11 +1199,21 @@
             <p class="section-subtitle">הספרינט הבא מתחיל ב-24.02 (יום שלישי, 19:00)</p>
 
             <div class="form-container">
-                <div class="form-placeholder">
-                    📋 כאן יוטמע טופס JotForm שלך<br><br>
-                    שדות מומלצים: שם מלא, טלפון, אימייל, שם העסק / תחום,<br>
-                    "מה הכי מעכב אותך היום להתחיל עם תוכן?"
-                </div>
+                <iframe
+                  id="JotFormIFrame-260535875927066"
+                  title="הבטיחו לעצמכם כרטיס למפגש הקרוב"
+                  onload="window.parent.scrollTo(0,0)"
+                  allowtransparency="true"
+                  allow="geolocation; microphone; camera; fullscreen; payment"
+                  src="https://form.jotform.com/260535875927066"
+                  frameborder="0"
+                  style="min-width:100%;max-width:100%;height:600px;border:none;"
+                  scrolling="no"
+                  loading="lazy"
+                >
+                </iframe>
+                <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+                <script>window.jotformEmbedHandler("iframe[id='JotFormIFrame-260535875927066']", "https://form.jotform.com/")</script>
             </div>
 
             <div class="divider">או</div>
