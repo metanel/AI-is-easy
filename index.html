@@ -14,15 +14,14 @@
             box-sizing: border-box;
         }
 
-        /* תיקון קריטי למניעת גלילה אופקית (ימינה-שמאלה) */
         html, body {
             overflow-x: hidden;
             width: 100%;
             max-width: 100vw;
+            scroll-behavior: smooth;
         }
 
         :root {
-            /* מצב כהה (ברירת מחדל) */
             --primary-bg: #0a0a0a;
             --secondary-bg: #141414;
             --card-bg: #1a1a1a;
@@ -33,14 +32,11 @@
             --text-secondary: #a1a1aa;
             --border-color: #27272a;
             --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             --header-bg: rgba(10, 10, 10, 0.95);
             --h1-gradient: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
             --shadow-heavy: 0 15px 35px rgba(0, 0, 0, 0.8);
         }
 
-        /* החלפה למצב בהיר אם זו הגדרת המערכת של המשתמש */
         @media (prefers-color-scheme: light) {
             :root {
                 --primary-bg: #f8fafc;
@@ -74,9 +70,6 @@
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 1px solid var(--border-color);
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         nav {
@@ -86,7 +79,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 0.5rem;
         }
 
         .logo {
@@ -96,8 +88,6 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            white-space: nowrap;
-            flex-shrink: 0;
         }
 
         .cta-buttons {
@@ -118,14 +108,34 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Heebo', sans-serif;
             white-space: nowrap;
         }
 
+        /* אפקט הברקה לכפתור הראשי */
         .btn-primary {
             background: var(--gradient-1);
             color: white;
             box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 200%; }
+            100% { left: 200%; }
         }
 
         .btn-primary:hover {
@@ -155,25 +165,6 @@
             margin: 0 auto;
             text-align: center;
             position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-            max-width: 100vw;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
         }
 
         .urgency-badge {
@@ -217,7 +208,6 @@
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
-            padding: 0 1rem;
         }
 
         .btn-large {
@@ -234,7 +224,7 @@
 
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* שומר על יחס 16:9 */
+            padding-bottom: 56.25%; 
             height: 0;
             overflow: hidden;
             border-radius: 16px;
@@ -249,10 +239,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 16px;
         }
 
-        /* Section Styles */
+        /* Generic Section */
         section {
             max-width: 1400px;
             margin: 0 auto;
@@ -278,7 +267,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-top: 4rem;
         }
 
         .problem-card {
@@ -305,12 +293,10 @@
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            color: var(--text-primary);
         }
 
         .problem-text {
             color: var(--text-secondary);
-            line-height: 1.8;
         }
 
         /* Solution Section */
@@ -332,7 +318,6 @@
         .solution-text {
             font-size: 1.2rem;
             color: var(--text-secondary);
-            line-height: 1.8;
             max-width: 800px;
             margin: 0 auto;
         }
@@ -354,41 +339,20 @@
             padding: 2.5rem;
             border-radius: 16px;
             border: 1px solid var(--border-color);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            position: relative;
-            z-index: 1;
+            transition: all 0.4s ease;
         }
 
         .feature-card:hover {
             transform: translateY(-8px);
             border-color: rgba(139, 92, 246, 0.5); 
-            box-shadow: var(--shadow-heavy), 0 0 25px rgba(139, 92, 246, 0.15);
-            z-index: 2;
+            box-shadow: var(--shadow-heavy);
         }
 
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .feature-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .feature-text {
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
+        .feature-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; }
+        .feature-text { color: var(--text-secondary); }
 
         /* Schedule Section */
-        .schedule-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
+        .schedule-container { max-width: 900px; margin: 0 auto; }
         .day-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -397,27 +361,9 @@
             margin-bottom: 1.5rem;
             transition: all 0.3s ease;
         }
-
-        .day-card:hover {
-            border-color: var(--accent-purple);
-            transform: translateX(-5px);
-        }
-
-        .day-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .day-number {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--accent-blue);
-        }
-
+        .day-card:hover { border-color: var(--accent-purple); transform: translateX(-5px); }
+        .day-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .day-number { font-size: 1.3rem; font-weight: 700; color: var(--accent-blue); }
         .day-type {
             padding: 0.5rem 1rem;
             background: rgba(59, 130, 246, 0.1);
@@ -428,344 +374,67 @@
             color: var(--accent-blue);
         }
 
-        .day-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .day-description {
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        /* Results Section */
-        .results-grid {
+        /* Results & Comparison & Testimonials */
+        .results-grid, .comparison-grid, .testimonial-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
         }
-
-        .result-card {
-            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(59, 130, 246, 0.05) 100%);
-            padding: 2.5rem;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .result-card:hover {
-            transform: scale(1.05);
-            border-color: var(--accent-blue);
-        }
-
-        .result-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .result-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .result-text {
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        /* Comparison Section */
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .comparison-card {
-            padding: 2.5rem;
-            border-radius: 16px;
-            border: 2px solid var(--border-color);
-        }
-
-        .comparison-card.bad {
-            background: rgba(239, 68, 68, 0.05);
-            border-color: rgba(239, 68, 68, 0.3);
-        }
-
-        .comparison-card.good {
-            background: rgba(16, 185, 129, 0.05);
-            border-color: rgba(16, 185, 129, 0.3);
-        }
-
-        .comparison-title {
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .comparison-list {
-            list-style: none;
-        }
-
-        .comparison-list li {
-            padding: 1rem 0;
-            padding-right: 2rem;
-            position: relative;
-            font-size: 1.1rem;
-        }
-
-        .comparison-list.bad li:before {
-            content: '✗';
-            position: absolute;
-            right: 0;
-            color: #ef4444;
-            font-weight: bold;
-        }
-
-        .comparison-list.good li:before {
-            content: '✓';
-            position: absolute;
-            right: 0;
-            color: var(--accent-green);
-            font-weight: bold;
-        }
-
-        /* Testimonials */
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .testimonial-card {
+        .results-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .comparison-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .testimonial-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        
+        .result-card, .comparison-card, .testimonial-card {
             background: var(--card-bg);
             padding: 2.5rem;
             border-radius: 16px;
             border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
         }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.2);
-        }
-
-        .stars {
-            color: #fbbf24;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .testimonial-text {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .testimonial-author {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .testimonial-role {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
+        
+        .comparison-card.bad { background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.3); }
+        .comparison-card.good { background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.3); }
+        .comparison-list { list-style: none; }
+        .comparison-list li { padding: 1rem 0; padding-right: 2rem; position: relative; font-size: 1.1rem; }
+        .comparison-list.bad li:before { content: '✗'; position: absolute; right: 0; color: #ef4444; font-weight: bold; }
+        .comparison-list.good li:before { content: '✓'; position: absolute; right: 0; color: var(--accent-green); font-weight: bold; }
 
         /* FAQ */
-        .faq-list {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
+        .faq-list { max-width: 900px; margin: 0 auto; }
         .faq-item {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             margin-bottom: 1.5rem;
-            overflow: hidden;
         }
+        .faq-question { padding: 1.5rem; font-size: 1.2rem; font-weight: 600; cursor: pointer; }
+        .faq-answer { padding: 0 1.5rem 1.5rem; color: var(--text-secondary); display: none; }
 
-        .faq-question {
-            padding: 1.5rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .faq-question:hover {
-            background: rgba(59, 130, 246, 0.05);
-            color: var(--accent-blue);
-        }
-
-        .faq-answer {
-            padding: 0 1.5rem 1.5rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            font-size: 1.1rem;
-            display: none;
-        }
-
-        /* Final CTA */
-        .final-cta {
-            background: var(--secondary-bg);
-            border-top: 1px solid var(--border-color);
-        }
-
-        .cta-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .form-container {
-            background: var(--card-bg);
-            border: 2px dashed var(--border-color);
-            border-radius: 16px;
-            padding: 3rem;
-            margin: 3rem 0;
-            overflow: hidden;
-        }
-
-        .form-placeholder {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.8;
-            word-wrap: break-word;
-        }
-
-        .divider {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .divider:before,
-        .divider:after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 40%;
-            height: 1px;
-            background: var(--border-color);
-        }
-
-        .divider:before {
-            right: 60%;
-        }
-
-        .divider:after {
-            left: 60%;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--secondary-bg);
-            border-top: 1px solid var(--border-color);
-            padding: 4rem 1.5rem 2rem;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-section h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-link {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            font-size: 1.5rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent-blue);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        /* סקשן הציטוט עם התמונה החדשה */
+        /* Quote Section - שודרג והוגדל! */
         .quote-section {
             max-width: 800px;
-            margin: 4rem auto;
+            margin: 4rem auto 0 auto;
             padding: 3rem;
             background: var(--card-bg);
             border-radius: 16px;
             border-right: 4px solid var(--accent-blue);
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .quote-image {
             flex-shrink: 0;
-            width: 120px;
+            width: 200px; /* הגדלנו משמעותית */
         }
 
         .quote-image img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--accent-blue);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
             display: block;
-        }
-
-        .quote-content {
-            flex-grow: 1;
         }
 
         .quote-text {
@@ -776,105 +445,79 @@
             margin-bottom: 1rem;
         }
 
-        .quote-author {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--accent-blue);
+        .quote-author { font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); }
+
+        /* Final CTA */
+        .final-cta { background: var(--secondary-bg); border-top: 1px solid var(--border-color); }
+        .cta-container { max-width: 800px; margin: 0 auto; text-align: center; }
+        .form-container {
+            background: var(--card-bg);
+            border: 2px dashed var(--border-color);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 3rem 0;
         }
+        .form-placeholder { color: var(--text-secondary); font-size: 1.1rem; }
+
+        /* Footer */
+        footer { background: var(--secondary-bg); border-top: 1px solid var(--border-color); padding: 4rem 1.5rem 2rem; }
+        .footer-content {
+            max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 3rem;
+        }
+        .footer-links { list-style: none; }
+        .footer-links a { color: var(--text-secondary); text-decoration: none; }
+        .social-links { display: flex; gap: 1rem; }
+        .social-link { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; text-decoration: none; }
+        
+        /* Mobile Sticky CTA Container */
+        .mobile-sticky-wrapper { display: none; }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            nav {
-                padding: 0.6rem 1rem;
-            }
-
-            .cta-buttons .btn-secondary {
-                display: none;
-            }
-
-            .logo {
-                font-size: 1.1rem;
-            }
-
-            .btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
-
+            nav { padding: 0.6rem 1rem; }
+            .cta-buttons .btn-secondary { display: none; }
+            .logo { font-size: 1.1rem; }
+            .btn { padding: 0.6rem 1rem; font-size: 0.9rem; }
             .desktop-text { display: none; }
             .mobile-text { display: inline; }
+            h1 { font-size: 1.8rem; }
+            section { padding: 4rem 1rem; }
 
-            .hero {
-                padding: 7rem 1rem 4rem;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            section {
-                padding: 4rem 1rem;
-            }
-
-            .investment-box, .form-container, .solution-box {
-                padding: 1.5rem;
-            }
-
-            .price {
-                font-size: 3rem;
-            }
-
-            /* התאמות לנייד עבור סקשן הציטוט והתמונה */
+            /* אזור הציטוט לנייד - התמונה ממורכזת ובולטת */
             .quote-section {
-                padding: 1.5rem;
-                gap: 1rem;
-                flex-direction: row; 
+                padding: 2rem 1.5rem;
+                gap: 1.5rem;
+                flex-direction: column; 
+                text-align: center;
+                border-right: none;
+                border-top: 4px solid var(--accent-blue);
             }
+            .quote-image { width: 130px; margin: 0 auto; }
+            .quote-text { font-size: 1.1rem; }
 
-            .quote-image {
-                width: 80px; 
+            /* הצגת הכפתור הצף בנייד בלבד */
+            .mobile-sticky-wrapper {
+                display: block;
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                max-width: 400px;
+                z-index: 999;
+                animation: slideUp 0.5s ease-out forwards;
             }
-
-            .quote-text {
-                font-size: 1.1rem; 
-                margin-bottom: 0.5rem;
+            .mobile-sticky-wrapper .btn {
+                width: 100%;
+                padding: 1rem;
+                font-size: 1.1rem;
+                box-shadow: 0 10px 25px rgba(102, 126, 234, 0.6);
             }
         }
-
-        /* Very small mobile devices (iPhone SE, etc.) */
-        @media (max-width: 380px) {
-            nav {
-                padding: 0.5rem 0.5rem;
-            }
-
-            .logo {
-                font-size: 0.9rem;
-            }
-
-            .btn {
-                padding: 0.5rem 0.7rem;
-                font-size: 0.8rem;
-            }
-
-            h1 {
-                font-size: 1.5rem;
-            }
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-in {
-            animation: fadeIn 0.6s ease-out forwards;
+        
+        @keyframes slideUp {
+            from { bottom: -100px; opacity: 0; }
+            to { bottom: 20px; opacity: 1; }
         }
     </style>
 </head>
@@ -906,309 +549,66 @@
 
     <section class="video-section">
         <div class="video-container">
-            <iframe 
-                src="https://www.youtube.com/embed/HYzsXcqqEf4" 
-                title="AI זה פשוט - סרטון הסבר" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
+            <iframe src="https://www.youtube.com/embed/HYzsXcqqEf4" title="AI זה פשוט - סרטון הסבר" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
+    </section>
 
     <section id="problem">
         <h2>הרי ידוע לך שנוכחות ברשתות היא חובה. אבל...</h2>
-
         <div class="problem-grid">
-            <div class="problem-card">
-                <span class="problem-icon">⏰</span>
-                <h3 class="problem-title">פשוט אין לך זמן</h3>
-                <p class="problem-text">במרתון של החיים למי יש דקה פנויה להתעסק גם עם הרשתות? המשימה הזו פשוט נדחקת לתחתית הרשימה.</p>
-            </div>
-
-            <div class="problem-card">
-                <span class="problem-icon">🤷‍♂️</span>
-                <h3 class="problem-title">הבלקאוט של "מה לפרסם הפעם?"</h3>
-                <p class="problem-text">למי יש אנרגיה לשבור את הראש כל בוקר מול המסך, בניסיון להמציא עוד רעיון לתוכן ויראלי?.</p>
-            </div>
-
-            <div class="problem-card">
-                <span class="problem-icon">😰</span>
-                <h3 class="problem-title">החשש שזה ייראה חובבני</h3>
-                <p class="problem-text">מה אם התוכן שלך לא ייראה טוב? ומה אם יהיו אפס תגובות? התחושות האלו פשוט גורמות לך לוותר מראש.</p>
-            </div>
-
-            <div class="problem-card">
-                <span class="problem-icon">💸</span>
-                <h3 class="problem-title">ניסית, וזה פשוט לא הביא תוצאות</h3>
-                <p class="problem-text">כבר פרסמת פוסטים והשקעת, אבל זה לא הביא לך אפילו ליד אחד. אז בשביל מה להמשיך להתאמץ?</p>
-            </div>
-
-            <div class="problem-card">
-                <span class="problem-icon">🎓</span>
-                <h3 class="problem-title">קורסים שלא באמת עוזרים</h3>
-                <p class="problem-text">יצא לך לרכוש קורסים דיגיטלים, אבל בסופו של דבר הם השאירו אותך עם אפס מעשים בשטח.</p>
-            </div>
-
-            <div class="problem-card">
-                <span class="problem-icon">🤖</span>
-                <h3 class="problem-title">עולם ה-AI מבלבל אותך</h3>
-                <p class="problem-text"> בכל פעם שמסבירים לך על בינה מלאכותית, זה נשמע מסובך ומאיים, במקום להישמע כמו כלי שבא לעשות לך חיים קלים.</p>
-            </div>
+            <div class="problem-card"><span class="problem-icon">⏰</span><h3 class="problem-title">פשוט אין לך זמן</h3><p class="problem-text">במרתון של החיים למי יש דקה פנויה להתעסק גם עם הרשתות? המשימה הזו פשוט נדחקת לתחתית הרשימה.</p></div>
+            <div class="problem-card"><span class="problem-icon">🤷‍♂️</span><h3 class="problem-title">הבלקאוט של "מה לפרסם הפעם?"</h3><p class="problem-text">למי יש אנרגיה לשבור את הראש כל בוקר מול המסך, בניסיון להמציא עוד רעיון לתוכן ויראלי?.</p></div>
+            <div class="problem-card"><span class="problem-icon">😰</span><h3 class="problem-title">החשש שזה ייראה חובבני</h3><p class="problem-text">מה אם התוכן שלך לא ייראה טוב? ומה אם יהיו אפס תגובות? התחושות האלו פשוט גורמות לך לוותר מראש.</p></div>
+            <div class="problem-card"><span class="problem-icon">💸</span><h3 class="problem-title">ניסית, וזה פשוט לא הביא תוצאות</h3><p class="problem-text">כבר פרסמת פוסטים והשקעת, אבל זה לא הביא לך אפילו ליד אחד. אז בשביל מה להמשיך להתאמץ?</p></div>
+            <div class="problem-card"><span class="problem-icon">🎓</span><h3 class="problem-title">קורסים שלא באמת עוזרים</h3><p class="problem-text">יצא לך לרכוש קורסים דיגיטלים, אבל בסופו של דבר הם השאירו אותך עם אפס מעשים בשטח.</p></div>
+            <div class="problem-card"><span class="problem-icon">🤖</span><h3 class="problem-title">עולם ה-AI מבלבל אותך</h3><p class="problem-text">בכל פעם שמסבירים לך על בינה מלאכותית, זה נשמע מסובך ומאיים, במקום להישמע כמו כלי שבא לעשות לך חיים קלים.</p></div>
         </div>
     </section>
 
     <section id="solution">
         <h2>הנה הפתרון</h2>
         <p class="section-subtitle">ספרינט AI של 14 יום שבו נעשה את זה ביחד</p>
-
         <div class="solution-box">
             <h3 class="solution-title">לא עוד קורס. זה ספרינט.</h3>
             <p class="solution-text">אנחנו לא רק מלמדים. אנחנו <span class="highlight">עושים איתך את העבודה</span>. במפגשים חיים, ניצור יחד את התוכן שלך <span class="highlight">בזמן אמת</span>, כשאני ממש כאן לידך - לענות על שאלות, לתקן טעויות, ולדאוג שההצלחה שלך בטוחה. בסוף 14 הימים, זה לא מסתכם ב-"למדתי עוד משהו" - <span class="highlight">יש לך ביד תוכן מוכן לפרסום ותהליך ברור שעובד</span>.</p>
         </div>
-
         <div class="features-grid">
-            <div class="feature-card">
-                <span class="feature-icon">🎯</span>
-                <h3 class="feature-title">מפגשים חיים</h3>
-                <p class="feature-text">פעמיים בשבוע, עושים ביחד, בזמן אמת. לא הקלטות שמעלות אבק בתיקייה - אלא עבודה מעשית שכוללת פידבק מיידי במקום.</p>
-            </div>
-
-            <div class="feature-card">
-                <span class="feature-icon">🤝</span>
-                <h3 class="feature-title">ליווי אישי 1:1 צמוד</h3>
-                <p class="feature-text">זה לא "שגר ושכח". במהלך הספרינט נשב לפגישה אישית בארבע עיניים. נעבור על העסק שלך, נדייק את המסרים ונוודא שהכל ברור. אני זמין לשאלות שלך בכל עת - אין שום מצב לעבור את זה לבד בשום שלב.</p>
-            </div>
-
-            <div class="feature-card">
-                <span class="feature-icon">🔥</span>
-                <h3 class="feature-title">קהילה אמיתית (כן, גם בחיים האמיתיים)</h3>
-                <p class="feature-text">אפשר לשכוח מעוד קבוצת וואטסאפ שקטה. אנחנו בונים כאן קהילה חיה, דוחפת ומרימה שכוללת גם מפגשים פיזיים! המטרה היא להפוך את ה-AI למשהו אנושי ומוחשי, ולייצר לך חיבור עם אנשים שרצים יחד איתך.</p>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 3rem;">
-            <a href="#form" class="btn btn-primary btn-large">🚀 אני בפנים!</a>
+            <div class="feature-card"><span class="feature-icon">🎯</span><h3 class="feature-title">מפגשים חיים</h3><p class="feature-text">פעמיים בשבוע, עושים ביחד, בזמן אמת. לא הקלטות שמעלות אבק בתיקייה - אלא עבודה מעשית שכוללת פידבק מיידי במקום.</p></div>
+            <div class="feature-card"><span class="feature-icon">🤝</span><h3 class="feature-title">ליווי אישי 1:1 צמוד</h3><p class="feature-text">זה לא "שגר ושכח". במהלך הספרינט נשב לפגישה אישית בארבע עיניים. נעבור על העסק שלך, נדייק את המסרים ונוודא שהכל ברור. אני זמין לשאלות שלך בכל עת.</p></div>
+            <div class="feature-card"><span class="feature-icon">🔥</span><h3 class="feature-title">קהילה אמיתית</h3><p class="feature-text">אפשר לשכוח מעוד קבוצת וואטסאפ שקטה. אנחנו בונים כאן קהילה חיה, דוחפת ומרימה שכוללת גם מפגשים פיזיים!</p></div>
         </div>
     </section>
 
     <section id="schedule">
         <h2>5 כלי AI שיהפכו אותך למכונת תוכן</h2>
         <p class="section-subtitle">כל מפגש = שליטה בכלי חדש לשימוש מידיי כבר באותו היום</p>
-
         <div class="schedule-container">
-            <div class="day-card">
-                <div class="day-header">
-                    <span class="day-number">מפגש 1</span>
-                    <span class="day-type">שיעור אונליין</span>
-                </div>
-                <h4 class="day-title">🎬 תסריטים ויראליים</h4>
-                <p class="day-description">כתיבת תסריטים מנצחים עם AI. בלי לשבור את הראש ובלי לתכנן שעות - ה-AI פשוט עושה הכל. עובדים עם תבניות מוכנות שרק צריך למלא.</p>
-            </div>
-
-            <div class="day-card">
-                <div class="day-header">
-                    <span class="day-number">מפגש 2</span>
-                    <span class="day-type">שיעור אונליין</span>
-                </div>
-                <h4 class="day-title">סרטונים ללא מצלמה</h4>
-                <p class="day-description">יצירת סרטונים ממגנטים בלי לקום מהספה! אפס עריכה, בלי לפתוח מצלמה, ואפילו בלי להקליט קול. ה-AI מייצר את הכל בשבילך.</p>
-            </div>
-
-            <div class="day-card">
-                <div class="day-header">
-                    <span class="day-number">מפגש 3</span>
-                    <span class="day-type">שיעור אונליין</span>
-                </div>
-                <h4 class="day-title">דף נחיתה בחינם לגמרי</h4>
-                <p class="day-description">לבנות לעצמנו בית. בניית דף נחיתה מקצועי שיקלוט את הלקוחות. מערכת חינמית לכל החיים, ללא צורך לדעת אפילו שורת קוד אחת.</p>
-            </div>
-
-            <div class="day-card">
-                <div class="day-header">
-                    <span class="day-number">מפגש 4</span>
-                    <span class="day-type">שיעור אונליין</span>
-                </div>
-                <h4 class="day-title">קידום ממומן</h4>
-                <p class="day-description">מריצים קמפיין פרסומי בלי קמפיינר. ה-AI כותב את הקופי ובוחר את הקהל המדויק, מה שחוסך עשרות אלפי שקלים על סוכנויות פרסום.</p>
-            </div>
-
-            <div class="day-card">
-                <div class="day-header">
-                    <span class="day-number">מפגש 5</span>
-                    <span class="day-type">שיעור אונליין</span>
-                </div>
-                <h4 class="day-title">אוטומציות בוואצאפ</h4>
-                <p class="day-description">מערכת שעובדת 24/7. אוטומציה לחימום לידים ומענה מהיר לכל מתעניין. והכי טוב? עושים את הכל בכלים חינמיים לחלוטין.</p>
-            </div>
+            <div class="day-card"><div class="day-header"><span class="day-number">מפגש 1</span><span class="day-type">שיעור אונליין</span></div><h4 class="day-title">🎬 תסריטים ויראליים</h4><p class="day-description">כתיבת תסריטים מנצחים עם AI. בלי לשבור את הראש ובלי לתכנן שעות - ה-AI פשוט עושה הכל.</p></div>
+            <div class="day-card"><div class="day-header"><span class="day-number">מפגש 2</span><span class="day-type">שיעור אונליין</span></div><h4 class="day-title">סרטונים ללא מצלמה</h4><p class="day-description">יצירת סרטונים ממגנטים בלי לקום מהספה! אפס עריכה, בלי לפתוח מצלמה, ואפילו בלי להקליט קול.</p></div>
+            <div class="day-card"><div class="day-header"><span class="day-number">מפגש 3</span><span class="day-type">שיעור אונליין</span></div><h4 class="day-title">דף נחיתה בחינם לגמרי</h4><p class="day-description">בניית דף נחיתה מקצועי שיקלוט את הלקוחות. מערכת חינמית לכל החיים, ללא צורך לדעת אפילו שורת קוד אחת.</p></div>
+            <div class="day-card"><div class="day-header"><span class="day-number">מפגש 4</span><span class="day-type">שיעור אונליין</span></div><h4 class="day-title">קידום ממומן</h4><p class="day-description">מריצים קמפיין פרסומי בלי קמפיינר. ה-AI כותב את הקופי ובוחר את הקהל המדויק.</p></div>
+            <div class="day-card"><div class="day-header"><span class="day-number">מפגש 5</span><span class="day-type">שיעור אונליין</span></div><h4 class="day-title">אוטומציות בוואצאפ</h4><p class="day-description">מערכת שעובדת 24/7. אוטומציה לחימום לידים ומענה מהיר לכל מתעניין. והכי טוב? עושים את הכל בכלים חינמיים לחלוטין.</p></div>
         </div>
-    </section>
-
-                <div style="text-align: center; margin-top: 2.5rem;">
+        <div style="text-align: center; margin-top: 2.5rem;">
             <a href="#form" class="btn btn-primary btn-large">🚀 השתכנעתי, אני רוצה לשריין מקום!</a>
         </div>
     </section>
 
     <section id="results">
         <h2>מה קורה בפועל אחרי הספרינט?</h2>
-        <p class="section-subtitle">אלה לא הבטחות - אלה תוצאות מתועדות</p>
-
         <div class="results-grid">
-            <div class="result-card">
-                <span class="result-icon">🧠</span>
-                <h3 class="result-title">ביטחון עצמי</h3>
-                <p class="result-text">ידיעה ברורה מה לפרסם, איך ומתי. בלי שבירת ראש על תסריטים – פשוט לעבור לעשייה.</p>
-            </div>
-            
-            <div class="result-card">
-                <span class="result-icon">🛋️</span>
-                <h3 class="result-title">נוכחות עקבית מהספה</h3>
-                <p class="result-text">פרסום קבוע של סרטונים כל שבוע במקום אפס. הקהל מתחיל להכיר אותך, ובמינמום מאמץ.</p>
-            </div>
-
-            <div class="result-card">
-                <span class="result-icon">🏠</span>
-                <h3 class="result-title">אתר בחינם לכל החיים</h3>
-                <p class="result-text">דף נחיתה מקצועי שבנית בעצמך (ובחינם לתמיד), המקום בו הלקוחות משאירים פרטים.</p>
-            </div>
-
-            <div class="result-card">
-                <span class="result-icon">💰</span>
-                <h3 class="result-title">סגירת עסקאות ומכירות</h3>
-                <p class="result-text">להרים טלפון ללקוחות החדשים שלך, ולסגור עסקאות.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="different">
-        <h2>למה זה לא עוד קורס שתשכח?</h2>
-        <p class="section-subtitle">ההבדל שעושה את כל ההבדל</p>
-
-        <div class="comparison-grid">
-            <div class="comparison-card bad">
-                <h3 class="comparison-title">❌ קורסים רגילים</h3>
-                <ul class="comparison-list bad">
-                    <li>דוחה ושוכח</li>
-                    <li>לא עושה בפועל</li>
-                    <li>נשאר לבד בתהליך</li>
-                </ul>
-            </div>
-
-            <div class="comparison-card good">
-                <h3 class="comparison-title">✅ הספרינט שלנו</h3>
-                <ul class="comparison-list good">
-                    <li>עושה בזמן אמת</li>
-                    <li>ליווי צמוד יד ביד</li>
-                    <li>נטו פרקטיקה</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="testimonials">
-        <h2>מה בוגרי הספרינט אומרים?</h2>
-        <p class="section-subtitle">סיפורי הצלחה אמיתיים</p>
-
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <p class="testimonial-text">"לפני הספרינט, היה לי אפס נוכחות ברשתות. היום אני מעלה סרטונים באופן קבוע פניות בחודש מאינסטגרם. ומתנאל היה איתי בכל צעד."</p>
-                <p class="testimonial-author">דני כהן</p>
-                <p class="testimonial-role">בעל סטודיו לעיצוב פנים</p>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <p class="testimonial-text">"חשבתי שאני לא טכנולוגית מספיק. התברר שזה ממש פשוט עם הכלים הנכונים והליווי הנכון. תודה ענקית!"</p>
-                <p class="testimonial-author">מיכל לוי</p>
-                <p class="testimonial-role">מאמנת כושר</p>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <p class="testimonial-text">"זה לא סתם עוד קורס. מתנאל באמת זמין, באמת עוזר, באמת דואג שאתה מצליח. משקיע מעולה."</p>
-                <p class="testimonial-author">יוסי אברהם</p>
-                <p class="testimonial-role">יועץ פיננסי</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="final-cta" id="form">
-        <div class="cta-container" style="padding: 4rem 1.5rem;">
-            <h2>הצעד הראשון מתחיל כאן.</h2>
-            <p class="section-subtitle">הספרינט הבא מתחיל ב-24.02 (יום שלישי, 19:00)</p>
-
-            <div class="form-container">
-                <div class="form-placeholder">
-                    📋 כאן יוטמע טופס JotForm שלך<br><br>
-                    שדות מומלצים: שם מלא, טלפון, אימייל, שם העסק / תחום,<br>
-                    "מה הכי מעכב אותך היום להתחיל עם תוכן?"
-                </div>
-            </div>
-
-            <div class="divider">או</div>
-
-            <a href="https://wa.me/yourphone" class="btn btn-primary btn-large">💬 העדפה לדבר איתי קודם? לחץ כאן לווטסאפ</a>
+            <div class="result-card"><span class="result-icon">🧠</span><h3 class="result-title">ביטחון עצמי</h3><p class="result-text">ידיעה ברורה מה לפרסם, איך ומתי. בלי שבירת ראש על תסריטים.</p></div>
+            <div class="result-card"><span class="result-icon">🛋️</span><h3 class="result-title">נוכחות עקבית מהספה</h3><p class="result-text">פרסום קבוע של סרטונים כל שבוע במקום אפס.</p></div>
+            <div class="result-card"><span class="result-icon">🏠</span><h3 class="result-title">אתר בחינם לכל החיים</h3><p class="result-text">דף נחיתה מקצועי שבנית בעצמך המקום בו הלקוחות משאירים פרטים.</p></div>
+            <div class="result-card"><span class="result-icon">💰</span><h3 class="result-title">סגירת עסקאות</h3><p class="result-text">להרים טלפון ללקוחות החדשים שלך, ולסגור עסקאות.</p></div>
         </div>
     </section>
 
     <section id="faq">
         <h2>שאלות נפוצות</h2>
-        <p class="section-subtitle">כל מה שרצית לדעת</p>
-
         <div class="faq-list">
-            <div class="faq-item">
-                <div class="faq-question">
-                    ❓ האם אני צריך ידע טכנולוגי מראש?
-                </div>
-                <div class="faq-answer">
-                    לא! זה בדיוק למי שלא טכנולוגי. אתה צריך רק מחשב נייד ואינטרנט.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    ❓ כמה זמן ביום אני צריך להשקיע?
-                </div>
-                <div class="faq-answer">
-                    המפגשים החיים הם פעמיים בשבוע בשעות הערב. סה"כ בערך 3-4 שעות בשבוע (כולל שיעורי הבית).
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    ❓ מה קורה אם אני מפספס מפגש?
-                </div>
-                <div class="faq-answer">
-                    יש לך גישה להקלטות. אבל ממליץ להגיע חי כי זה הרבה יותר אפקטיבי.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    ❓ האם זה מתאים רק לעסקים או לכל מי שרוצה ליצור תוכן לרשתות החברתיות?
-                </div>
-                <div class="faq-answer">
-                    הפוקוס הוא ללמוד איך לייצר לקוחות מהרשתות החברתיות, ולכן הדגש הוא לא רק על יצירת התוכן.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    ❓ מה קורה אחרי 14 הימים?
-                </div>
-                <div class="faq-answer">
-                    אתה יכול להמשיך איתנו בליווי חודשי (מפגשים אישיים בכל הנוגע לתפעול כלי הבינה המלאכותית שלך) או להישאר עצמאי. אין התחייבות.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    ❓ איך עובד "מפגש ראשון ללא עלות"?
-                </div>
-                <div class="faq-answer">
-                    מגיעים למפגש הראשון חינם. לא אהבת לא שילמת. אם אהבת - ממשיך לשאר המפגשים.
-                </div>
-            </div>
+            <div class="faq-item"><div class="faq-question">❓ האם אני צריך ידע טכנולוגי מראש?</div><div class="faq-answer">לא! זה בדיוק למי שלא טכנולוגי. אתה צריך רק מחשב נייד ואינטרנט.</div></div>
+            <div class="faq-item"><div class="faq-question">❓ כמה זמן ביום אני צריך להשקיע?</div><div class="faq-answer">המפגשים החיים הם פעמיים בשבוע בשעות הערב. סה"כ בערך 3-4 שעות בשבוע.</div></div>
         </div>
     </section>
 
@@ -1224,93 +624,52 @@
         </div>
     </section>
 
+    <section class="final-cta" id="form">
+        <div class="cta-container" style="padding: 4rem 1.5rem;">
+            <h2>הצעד הראשון מתחיל כאן.</h2>
+            <p class="section-subtitle">הספרינט הבא מתחיל ב-24.02 (יום שלישי, 19:00)</p>
+            <div class="form-container">
+                <div class="form-placeholder">
+                    📋 כאן יוטמע טופס JotForm שלך<br><br>
+                    שדות מומלצים: שם מלא, טלפון, אימייל, שם העסק / תחום,<br>
+                    "מה הכי מעכב אותך היום להתחיל עם תוכן?"
+                </div>
+            </div>
+            <div class="divider">או</div>
+            <a href="https://wa.me/yourphone" class="btn btn-primary btn-large">💬 העדפה לדבר איתי קודם? לחץ כאן לווטסאפ</a>
+        </div>
+    </section>
+
     <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <div class="logo" style="margin-bottom: 1rem;">🤖 AI זה פשוט</div>
-                <p style="color: var(--text-secondary);">ספרינט AI מעשי שמלמד אותך לייצר תוכן ולקוחות מהרשתות החברתיות</p>
-            </div>
-
-            <div class="footer-section">
-                <h3>קישורים</h3>
-                <ul class="footer-links">
-                    <li><a href="#problem">הבעיה</a></li>
-                    <li><a href="#solution">הפתרון</a></li>
-                    <li><a href="#schedule">מה תלמד</a></li>
-                    <li><a href="#testimonials">המלצות</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>מידע</h3>
-                <ul class="footer-links">
-                    <li><a href="#">מי אני</a></li>
-                    <li><a href="#">תנאי שימוש</a></li>
-                    <li><a href="#">מדיניות פרטיות</a></li>
-                    <li><a href="#">צור קשר</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>רשתות חברתיות</h3>
-                <div class="social-links">
-                    <a href="#" class="social-link">📷</a>
-                    <a href="#" class="social-link">👍</a>
-                    <a href="#" class="social-link">💼</a>
-                </div>
+                <p style="color: var(--text-secondary);">ספרינט AI מעשי שמלמד אותך לייצר תוכן ולקוחות מהרשתות</p>
             </div>
         </div>
-
-        <div class="copyright">
-            © 2025 AI זה פשוט. כל הזכויות שמורות.
-        </div>
+        <div class="copyright">© 2025 AI זה פשוט. כל הזכויות שמורות.</div>
     </footer>
 
+    <div class="mobile-sticky-wrapper">
+        <a href="#form" class="btn btn-primary">לשריון מקום עכשיו 🚀</a>
+    </div>
+
     <script>
-        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-
-        // FAQ accordion functionality
         document.querySelectorAll('.faq-question').forEach(question => {
             question.addEventListener('click', () => {
                 const answer = question.nextElementSibling;
                 const isOpen = answer.style.display === 'block';
-                
-                // Close all answers
-                document.querySelectorAll('.faq-answer').forEach(a => {
-                    a.style.display = 'none';
-                });
-                
-                // Toggle clicked answer
+                document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
                 answer.style.display = isOpen ? 'none' : 'block';
             });
         });
