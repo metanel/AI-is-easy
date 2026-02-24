@@ -25,40 +25,41 @@
         }
 
         :root {
-            /* צבעי אנרגיה מתפרצת - פרוסים על כל הדף */
-            --bg-gradient: linear-gradient(135deg, #1e0b36 0%, #511245 40%, #c43227 100%);
+            /* רקע בהיר, חמים ומרגיע לעין */
+            --bg-main: #fdfbf7; 
+            --bg-card: #ffffff;
             
-            /* עיצוב זכוכית (Glassmorphism) לכרטיסיות */
-            --glass-bg: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            /* צבעי המותג החדשים - נעימים ומשדרים כסף ועשייה */
+            --accent-green: #059669; /* ירוק אמרלד/כסף - עשיר ונעים */
+            --accent-green-hover: #047857;
+            --accent-yellow: #f59e0b; /* צהוב-זהב חם לאנרגיה והדגשות */
+            --accent-yellow-light: rgba(245, 158, 11, 0.1);
             
-            /* טקסטים בהירים על הרקע הכהה */
-            --text-main: #ffffff;
-            --text-muted: #e2e8f0;
+            /* צבעי טקסט ברורים ונוחים */
+            --text-dark: #1e293b;
+            --text-muted: #475569;
+            --border-soft: #e2e8f0;
             
-            /* כפתורים בוהקים */
-            --accent-btn: linear-gradient(to right, #ff416c, #ff4b2b);
-            --accent-glow: #ff4b2b;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --hover-shadow: 0 20px 35px -5px rgba(5, 150, 105, 0.1);
         }
 
         body {
             font-family: 'Heebo', sans-serif;
-            background: var(--bg-gradient);
-            background-attachment: fixed; /* הרקע נשאר במקום בזמן הגלילה לעומק */
-            color: var(--text-main);
+            background-color: var(--bg-main);
+            color: var(--text-dark);
             line-height: 1.6;
         }
 
-        /* סרגל ניווט - זכוכית */
+        /* סרגל ניווט נקי */
         header {
             position: fixed;
             top: 0; left: 0; right: 0;
-            background: rgba(15, 11, 25, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(8px);
             z-index: 1000;
-            border-bottom: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--border-soft);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
         }
 
         nav {
@@ -73,135 +74,123 @@
         .logo {
             font-size: 1.4rem;
             font-weight: 900;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
+        .logo::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent-yellow);
+            border-radius: 50%;
+        }
+
+        /* כפתורים אלגנטיים ולא מסנוורים */
         .btn {
             padding: 0.8rem 1.8rem;
-            border-radius: 50px;
+            border-radius: 8px; /* חזרנו לפינות מעוגלות עדינות, יותר עסקי */
             font-size: 1.1rem;
-            font-weight: 800;
+            font-weight: 700;
             cursor: pointer;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
             border: none;
         }
 
         .btn-primary {
-            background: var(--accent-btn);
+            background-color: var(--accent-green);
             color: white;
-            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
         }
 
         .btn-primary:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(255, 75, 43, 0.7);
+            background-color: var(--accent-green-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(5, 150, 105, 0.35);
         }
 
         .btn-outline {
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(5px);
+            background-color: transparent;
+            color: var(--text-dark);
+            border: 2px solid var(--border-soft);
         }
 
         .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: white;
-            transform: translateY(-3px);
+            border-color: var(--accent-yellow);
+            color: var(--accent-yellow);
+            background-color: var(--accent-yellow-light);
         }
 
-        /* אזורים משותפים */
-        section {
-            padding: 7rem 1.5rem;
-            max-width: 1200px;
+        /* סקשן גיבור (Hero) נעים אבל אנרגטי */
+        .hero {
+            padding: 11rem 1.5rem 7rem;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at top right, var(--accent-yellow-light), transparent 50%),
+                        radial-gradient(circle at bottom left, rgba(5, 150, 105, 0.05), transparent 40%);
+        }
+
+        .hero-content {
+            max-width: 900px;
             margin: 0 auto;
             position: relative;
-        }
-
-        h2 {
-            font-size: 3rem;
-            font-weight: 900;
-            text-align: center;
-            margin-bottom: 1rem;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.4rem;
-            color: var(--text-muted);
-            margin-bottom: 4rem;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        /* מחלקת זכוכית כללית לכל הכרטיסיות */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            box-shadow: var(--glass-shadow);
-            padding: 2.5rem;
-            transition: all 0.4s ease;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-        }
-
-        /* סקשן גיבור */
-        .hero {
-            padding-top: 12rem;
-            text-align: center;
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            z-index: 2;
         }
 
         .urgency-badge {
             display: inline-block;
-            background: rgba(255, 75, 43, 0.2);
-            border: 1px solid var(--accent-glow);
-            color: white;
-            padding: 0.6rem 2rem;
+            background-color: var(--accent-yellow-light);
+            color: #d97706; /* זהב כהה לקריאות */
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 0.5rem 1.5rem;
             border-radius: 50px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 800;
             margin-bottom: 2rem;
-            box-shadow: 0 0 20px rgba(255, 75, 43, 0.4);
-            animation: pulseSoft 2s infinite;
-        }
-
-        @keyframes pulseSoft {
-            0%, 100% { box-shadow: 0 0 15px rgba(255, 75, 43, 0.4); }
-            50% { box-shadow: 0 0 30px rgba(255, 75, 43, 0.8); }
         }
 
         h1 {
-            font-size: 4.5rem;
+            font-size: 3.8rem;
             font-weight: 900;
-            line-height: 1.1;
+            line-height: 1.15;
             margin-bottom: 1.5rem;
-            text-shadow: 0 5px 25px rgba(0,0,0,0.4);
+            color: var(--text-dark);
         }
 
-        .hero .subtitle {
-            font-size: 1.6rem;
-            font-weight: 400;
+        h1 span {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* פס הדגשה צהוב מתחת לטקסט */
+        h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background-color: var(--accent-yellow);
+            opacity: 0.4;
+            z-index: -1;
+            border-radius: 4px;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 3.5rem;
+            color: var(--text-muted);
             max-width: 800px;
-            margin: 0 auto 3.5rem;
-            color: #f1f5f9;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-cta {
@@ -211,7 +200,61 @@
             flex-wrap: wrap;
         }
 
-        /* גריד בעיות */
+        section {
+            padding: 6rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 4rem;
+        }
+
+        /* כרטיסיות נקיות */
+        .card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-soft);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* פס ירוק עדין בחלק העליון של הכרטיסייה במעבר עכבר */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background-color: var(--accent-green);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: right;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+            border-color: rgba(5, 150, 105, 0.2);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
         .problem-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -219,48 +262,58 @@
         }
 
         .card-icon {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            display: inline-block;
-            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background-color: var(--accent-yellow-light);
+            color: var(--accent-yellow);
+            border-radius: 12px;
         }
 
         .card-title {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            color: #fff;
+            color: var(--text-dark);
         }
 
         /* על עצמי */
         .about-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 4rem;
             display: flex;
             align-items: center;
             gap: 4rem;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-soft);
         }
 
         .about-image img {
             width: 100%;
-            max-width: 380px;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            border: 2px solid var(--glass-border);
+            max-width: 350px;
+            border-radius: 16px;
+            box-shadow: 15px 15px 0px var(--accent-yellow-light);
         }
 
         .about-content h3 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 900;
+            color: var(--text-dark);
             margin-bottom: 1.5rem;
-            color: #fff;
         }
 
         .about-text {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--text-muted);
             margin-bottom: 1.5rem;
         }
 
-        /* שלבים */
+        /* לוח זמנים / שיטה */
         .schedule-container {
             max-width: 900px;
             margin: 0 auto;
@@ -272,78 +325,105 @@
         .step-card {
             display: flex;
             align-items: center;
-            gap: 2.5rem;
-            padding: 2rem 3rem;
+            gap: 2rem;
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-soft);
+            border-right: 6px solid var(--accent-yellow);
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateX(-8px);
+            border-right-color: var(--accent-green);
         }
 
         .step-number {
-            font-size: 4rem;
+            font-size: 2.5rem;
             font-weight: 900;
-            color: transparent;
-            -webkit-text-stroke: 2px rgba(255,255,255,0.4);
+            color: var(--accent-green);
+            opacity: 0.2;
             line-height: 1;
-            min-width: 80px;
+            min-width: 60px;
         }
 
         .step-content h4 {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 800;
             margin-bottom: 0.5rem;
+            color: var(--text-dark);
         }
 
-        .step-content p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        /* אזור הרשמה תחתון */
+        /* קריאה לפעולה סופית - מעוצב כבלוק בולט אבל נעים */
         .final-cta {
+            background-color: var(--accent-green);
+            background-image: radial-gradient(circle at top right, rgba(255,255,255,0.1), transparent);
+            padding: 5rem 1.5rem;
             text-align: center;
-            padding: 5rem 2rem;
-            margin-top: 4rem;
+            color: white;
+            border-radius: 24px;
+            margin: 4rem auto;
+            max-width: 1000px;
+            box-shadow: 0 20px 40px rgba(5, 150, 105, 0.2);
+        }
+
+        .final-cta h2 {
+            color: white;
+        }
+
+        .final-cta .section-subtitle {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
         }
 
         .event-details {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 1.5rem 3rem;
+            margin: 1.5rem auto 3rem;
             display: inline-block;
-            margin: 2rem auto;
-            padding: 2rem 3rem;
         }
 
         .event-details p {
-            font-size: 1.5rem;
-            font-weight: 800;
+            font-size: 1.3rem;
+            font-weight: 700;
             margin: 0.5rem 0;
-            color: #fff;
+            color: white;
         }
 
         .form-container {
-            background: rgba(255,255,255,0.95); /* הטופס עצמו לבן כדי שיהיה קריא */
-            border-radius: 20px;
-            padding: 1rem;
-            margin: 3rem auto;
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 0 auto;
             max-width: 800px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
 
         .btn-whatsapp {
             background: #25D366;
             color: white;
-            margin-top: 2rem;
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            margin-top: 2.5rem;
+            box-shadow: 0 8px 15px rgba(37, 211, 102, 0.3);
         }
 
         .btn-whatsapp:hover {
             background: #1ebd5a;
+            transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
+            h1 { font-size: 2.4rem; }
             h2 { font-size: 2.2rem; }
-            .hero { padding-top: 8rem; min-height: auto; }
+            .hero { padding: 8rem 1rem 4rem; }
             .hero-cta { flex-direction: column; }
-            .about-section { flex-direction: column; text-align: center; gap: 2rem; padding: 2rem; }
-            .step-card { flex-direction: column; text-align: center; gap: 1rem; padding: 2rem; }
-            .step-number { -webkit-text-stroke: 1px rgba(255,255,255,0.6); }
+            .about-section { flex-direction: column; padding: 2rem; text-align: center; }
+            .step-card { flex-direction: column; text-align: center; gap: 1rem; padding: 1.5rem; border-right: none; border-top: 6px solid var(--accent-yellow); }
+            .step-card:hover { transform: translateY(-5px); border-top-color: var(--accent-green); }
+            .final-cta { border-radius: 0; padding: 4rem 1rem; margin-top: 2rem; }
         }
     </style>
 </head>
@@ -352,19 +432,19 @@
         <nav>
             <div class="logo">מתנאל מלכה</div>
             <div>
-                <a href="#form" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 1rem;">שריון מקום</a>
+                <a href="#form" class="btn btn-primary" style="padding: 0.5rem 1.2rem; font-size: 1rem;">שריון מקום למפגש</a>
             </div>
         </nav>
     </header>
 
     <main>
         <section class="hero">
-            <div>
-                <div class="urgency-badge">🚀 זה הזמן לעשות את הצעד</div>
-                <h1>זהו, אפשר לעבור לעסק משלכם.<br>או להקפיץ את הקיים.</h1>
-                <p class="subtitle">הדרך המהירה והשפויה לייצר לקוחות אמיתיים מהרשתות ב-2026. בלי הון עצמי, בלי לדעת קוד, ובלי להראות את הפנים למצלמה. רק אתם והבינה המלאכותית.</p>
+            <div class="hero-content">
+                <div class="urgency-badge">ההזדמנות שלכם ב-2026</div>
+                <h1>זהו, אפשר לעבור לעסק משלכם.<br><span>או להקפיץ את הקיים.</span></h1>
+                <p class="subtitle">הדרך המהירה והשפויה לייצר לקוחות אמיתיים מהרשתות. בלי הון עצמי, בלי לדעת קוד, ובלי להראות את הפנים למצלמה. רק אתם והבינה המלאכותית.</p>
                 <div class="hero-cta">
-                    <a href="#form" class="btn btn-primary">🔥 שריינו מקום למפגש ב-3.3 (ללא עלות)</a>
+                    <a href="#form" class="btn btn-primary">שריינו מקום למפגש (ללא עלות)</a>
                     <a href="#real-talk" class="btn btn-outline">איך זה בכלל אפשרי? 👇</a>
                 </div>
             </div>
@@ -375,25 +455,25 @@
             <p class="section-subtitle">אם פעם הייתם צריכים אלפי שקלים וביטחון של כוכב קולנוע – היום הכללים השתנו.</p>
 
             <div class="problem-grid">
-                <div class="glass-card">
+                <div class="card">
                     <span class="card-icon">🙈</span>
                     <h3 class="card-title">אין צורך להצטלם</h3>
                     <p class="text-muted">מפחדים מהמצלמה? לא נורא. נלמד איך המכונה מייצרת עבורכם סרטונים ממגנטים בלי שתצטרכו לדבר או להראות את הפנים.</p>
                 </div>
 
-                <div class="glass-card">
+                <div class="card">
                     <span class="card-icon">💰</span>
                     <h3 class="card-title">אין צורך בהון עצמי</h3>
                     <p class="text-muted">לא צריך תקציבי עתק. רוב הכלים שנשתמש בהם כדי לייצר לקוחות הם חינמיים לחלוטין. הכסף נשאר אצלכם בכיס.</p>
                 </div>
 
-                <div class="glass-card">
+                <div class="card">
                     <span class="card-icon">💻</span>
                     <h3 class="card-title">אפס ידע טכנולוגי</h3>
                     <p class="text-muted">לא צריך לדעת שורת קוד אחת. אם אתם יודעים להפעיל מחשב, אתם תדעו לייצר דף נחיתה מקצועי לקליטת לידים (בחינם לכל החיים).</p>
                 </div>
 
-                <div class="glass-card">
+                <div class="card">
                     <span class="card-icon">🧠</span>
                     <h3 class="card-title">הסוף למחסום הכתיבה</h3>
                     <p class="text-muted">לא יודעים מה לפרסם? ה-AI חושבת בשבילכם. היא כותבת תסריטים ויראליים ופוסטים שמוכרים, אתם רק צריכים לאשר.</p>
@@ -402,7 +482,7 @@
         </section>
 
         <section id="about">
-            <div class="glass-card about-section">
+            <div class="about-section">
                 <div class="about-image">
                     <img src="https://res.cloudinary.com/dhkn7tjxq/image/upload/v1771885244/IMG_2163_iiwtbs.png" alt="מתנאל מלכה">
                 </div>
@@ -423,54 +503,54 @@
             <p class="section-subtitle">ב-5 מפגשי אונליין, אנחנו בונים יחד את מכונת הלקוחות שלכם</p>
 
             <div class="schedule-container">
-                <div class="glass-card step-card">
+                <div class="step-card">
                     <div class="step-number">01</div>
                     <div class="step-content">
                         <h4>תסריטים ויראליים שכותבים את עצמם</h4>
-                        <p>ה-AI כותבת את הפוסטים והתסריטים שמביאים לידים. אתם רק עוברים על זה ומאשרים.</p>
+                        <p class="text-muted">ה-AI כותבת את הפוסטים והתסריטים שמביאים לידים. אתם רק עוברים על זה ומאשרים.</p>
                     </div>
                 </div>
 
-                <div class="glass-card step-card">
+                <div class="step-card">
                     <div class="step-number">02</div>
                     <div class="step-content">
                         <h4>סרטונים "מהספה" (בלי להצטלם)</h4>
-                        <p>יצירת תוכן וידאו ממגנט לרשתות החברתיות בלי לפתוח מצלמה, בלי תאורה ובלי להקליט קול.</p>
+                        <p class="text-muted">יצירת תוכן וידאו ממגנט לרשתות החברתיות בלי לפתוח מצלמה, בלי תאורה ובלי להקליט קול.</p>
                     </div>
                 </div>
 
-                <div class="glass-card step-card">
+                <div class="step-card">
                     <div class="step-number">03</div>
                     <div class="step-content">
                         <h4>הבית הדיגיטלי שלכם (בחינם)</h4>
-                        <p>בניית דף נחיתה מקצועי לקליטת הלקוחות - ללא קוד וללא עלות תחזוקה חודשית.</p>
+                        <p class="text-muted">בניית דף נחיתה מקצועי לקליטת הלקוחות - ללא קוד וללא עלות תחזוקה חודשית.</p>
                     </div>
                 </div>
 
-                <div class="glass-card step-card">
+                <div class="step-card">
                     <div class="step-number">04</div>
                     <div class="step-content">
                         <h4>שיווק חכם בלי לשלם לקמפיינר</h4>
-                        <p>איך להרים קמפיין ממומן שהבינה המלאכותית מנהלת עבורכם. חוסכים המון כסף על סוכנויות.</p>
+                        <p class="text-muted">איך להרים קמפיין ממומן שהבינה המלאכותית מנהלת עבורכם. חוסכים המון כסף על סוכנויות.</p>
                     </div>
                 </div>
 
-                <div class="glass-card step-card">
+                <div class="step-card">
                     <div class="step-number">05</div>
                     <div class="step-content">
                         <h4>שירות לקוחות אוטומטי בוואטסאפ</h4>
-                        <p>מערכת חינמית שתענה למתעניינים שלכם בוואטסאפ ותחמם אותם לעסקה 24/7.</p>
+                        <p class="text-muted">מערכת חינמית שתענה למתעניינים שלכם בוואטסאפ ותחמם אותם לעסקה 24/7.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="form">
-            <div class="glass-card final-cta">
+        <section id="form" style="padding-bottom: 0;">
+            <div class="final-cta">
                 <h2>מוכנים לעשות את הצעד הראשון?</h2>
-                <p class="section-subtitle" style="margin-bottom: 1rem;">השאירו פרטים ונשריין לכם מקום במפגש החשיפה</p>
+                <p class="section-subtitle">השאירו פרטים ונשריין לכם מקום במפגש החשיפה</p>
 
-                <div class="glass-card event-details" style="background: rgba(0,0,0,0.2);">
+                <div class="event-details">
                     <p>📅 מתי: יום שלישי, 3.3.2026</p>
                     <p>⏰ שעה: 20:30 בערב</p>
                     <p>💻 איפה: אונליין (ללא עלות)</p>
@@ -493,17 +573,17 @@
                 </div>
 
                 <div>
-                    <a href="https://wa.link/9jo3zq" target="_blank" class="btn btn-whatsapp btn-large">
-                        💬 מעדיפים לדבר איתי קודם? לחצו לווטסאפ
+                    <a href="https://wa.link/9jo3zq" target="_blank" class="btn btn-whatsapp">
+                        מעדיפים לדבר איתי קודם? לחצו לווטסאפ
                     </a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer style="text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 4rem;">
+    <footer style="text-align: center; padding: 2rem; color: var(--text-muted); background-color: var(--bg-main);">
         <div class="logo" style="margin-bottom: 0.5rem; justify-content: center;">מתנאל מלכה</div>
-        <p style="color: rgba(255,255,255,0.5);">© 2026 כל הזכויות שמורות.</p>
+        <p>© 2026 כל הזכויות שמורות.</p>
     </footer>
 
 </body>
