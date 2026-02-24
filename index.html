@@ -25,34 +25,40 @@
         }
 
         :root {
-            /* צבעי אנרגיה מתפרצת - אש, תשוקה, פעולה */
-            --bg-vibrant: linear-gradient(135deg, #FF512F 0%, #F09819 100%);
-            --bg-soft: #fffaf7; /* רקע חמים ורך לאזורי התוכן */
-            --text-dark: #1e293b;
-            --text-light: #475569;
+            /* צבעי אנרגיה מתפרצת - פרוסים על כל הדף */
+            --bg-gradient: linear-gradient(135deg, #1e0b36 0%, #511245 40%, #c43227 100%);
             
-            /* כפתורים סופר-קונטרסטיים (כחול-סגול עמוק) שיבלטו על הכתום */
-            --accent-button: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-            --accent-coral: #FF512F;
+            /* עיצוב זכוכית (Glassmorphism) לכרטיסיות */
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
             
-            --card-shadow: 0 15px 35px rgba(255, 81, 47, 0.08);
-            --hover-shadow: 0 20px 40px rgba(255, 81, 47, 0.15);
+            /* טקסטים בהירים על הרקע הכהה */
+            --text-main: #ffffff;
+            --text-muted: #e2e8f0;
+            
+            /* כפתורים בוהקים */
+            --accent-btn: linear-gradient(to right, #ff416c, #ff4b2b);
+            --accent-glow: #ff4b2b;
         }
 
         body {
             font-family: 'Heebo', sans-serif;
-            background-color: var(--bg-soft);
-            color: var(--text-dark);
+            background: var(--bg-gradient);
+            background-attachment: fixed; /* הרקע נשאר במקום בזמן הגלילה לעומק */
+            color: var(--text-main);
             line-height: 1.6;
         }
 
+        /* סרגל ניווט - זכוכית */
         header {
             position: fixed;
             top: 0; left: 0; right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 11, 25, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--glass-border);
         }
 
         nav {
@@ -67,7 +73,8 @@
         .logo {
             font-size: 1.4rem;
             font-weight: 900;
-            color: var(--accent-coral);
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
         .btn {
@@ -85,86 +92,116 @@
         }
 
         .btn-primary {
-            background: var(--accent-button);
+            background: var(--accent-btn);
             color: white;
-            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
         .btn-primary:hover {
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(79, 70, 229, 0.6);
+            box-shadow: 0 10px 25px rgba(255, 75, 43, 0.7);
         }
 
-        .btn-white {
-            background: white;
-            color: var(--accent-coral);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        .btn-white:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
-            color: var(--text-dark);
-        }
-
-        /* סקשן גיבור (Hero) מתפרץ */
-        .hero {
-            padding: 12rem 1.5rem 8rem;
-            background: var(--bg-vibrant);
+        .btn-outline {
+            background: transparent;
             color: white;
-            text-align: center;
-            position: relative;
-            clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjwvc3ZnPg==');
-            opacity: 0.3;
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            transform: translateY(-3px);
         }
 
-        .hero-content {
-            max-width: 900px;
+        /* אזורים משותפים */
+        section {
+            padding: 7rem 1.5rem;
+            max-width: 1200px;
             margin: 0 auto;
             position: relative;
-            z-index: 2;
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            margin-bottom: 4rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* מחלקת זכוכית כללית לכל הכרטיסיות */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: var(--glass-shadow);
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        /* סקשן גיבור */
+        .hero {
+            padding-top: 12rem;
+            text-align: center;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .urgency-badge {
             display: inline-block;
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.4);
+            background: rgba(255, 75, 43, 0.2);
+            border: 1px solid var(--accent-glow);
             color: white;
             padding: 0.6rem 2rem;
             border-radius: 50px;
             font-size: 1.2rem;
             font-weight: 800;
             margin-bottom: 2rem;
+            box-shadow: 0 0 20px rgba(255, 75, 43, 0.4);
             animation: pulseSoft 2s infinite;
         }
 
         @keyframes pulseSoft {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 75, 43, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(255, 75, 43, 0.8); }
         }
 
         h1 {
-            font-size: 3.8rem;
+            font-size: 4.5rem;
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-shadow: 0 5px 25px rgba(0,0,0,0.4);
         }
 
-        .subtitle {
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 3.5rem;
-            opacity: 0.95;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .hero .subtitle {
+            font-size: 1.6rem;
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto 3.5rem;
+            color: #f1f5f9;
         }
 
         .hero-cta {
@@ -174,102 +211,56 @@
             flex-wrap: wrap;
         }
 
-        section {
-            padding: 6rem 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h2 {
-            font-size: 2.8rem;
-            font-weight: 900;
-            text-align: center;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.3rem;
-            color: var(--text-light);
-            margin-bottom: 4rem;
-        }
-
-        .card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 24px;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
-            position: relative;
-            border: 1px solid rgba(255, 81, 47, 0.05);
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--hover-shadow);
-        }
-
+        /* גריד בעיות */
         .problem-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 2rem;
         }
 
         .card-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1.5rem;
             display: inline-block;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
         }
 
         .card-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            color: var(--accent-coral);
+            color: #fff;
         }
 
         /* על עצמי */
         .about-section {
-            background: white;
-            border-radius: 30px;
-            padding: 4rem;
             display: flex;
             align-items: center;
             gap: 4rem;
-            box-shadow: var(--card-shadow);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-section::before {
-            content: '';
-            position: absolute;
-            top: 0; right: 0; width: 10px; height: 100%;
-            background: var(--bg-vibrant);
         }
 
         .about-image img {
             width: 100%;
-            max-width: 350px;
+            max-width: 380px;
             border-radius: 20px;
-            box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 2px solid var(--glass-border);
         }
 
         .about-content h3 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 900;
-            color: var(--text-dark);
             margin-bottom: 1.5rem;
+            color: #fff;
         }
 
         .about-text {
             font-size: 1.3rem;
-            color: var(--text-light);
+            color: var(--text-muted);
             margin-bottom: 1.5rem;
         }
 
-        /* לוח זמנים / שיטה */
+        /* שלבים */
         .schedule-container {
             max-width: 900px;
             margin: 0 auto;
@@ -281,93 +272,78 @@
         .step-card {
             display: flex;
             align-items: center;
-            gap: 2rem;
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: var(--card-shadow);
-            border-right: 6px solid var(--accent-coral);
-            transition: transform 0.3s ease;
-        }
-
-        .step-card:hover {
-            transform: translateX(-10px);
-            border-right-color: #4f46e5;
+            gap: 2.5rem;
+            padding: 2rem 3rem;
         }
 
         .step-number {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 900;
-            color: rgba(255, 81, 47, 0.15);
+            color: transparent;
+            -webkit-text-stroke: 2px rgba(255,255,255,0.4);
             line-height: 1;
+            min-width: 80px;
         }
 
         .step-content h4 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 800;
             margin-bottom: 0.5rem;
         }
 
-        /* קריאה לפעולה סופית */
+        .step-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* אזור הרשמה תחתון */
         .final-cta {
-            background: var(--bg-vibrant);
-            padding: 6rem 1.5rem;
             text-align: center;
-            color: white;
-            clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+            padding: 5rem 2rem;
             margin-top: 4rem;
         }
 
-        .final-cta h2, .final-cta .section-subtitle {
-            color: white;
-        }
-
         .event-details {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 2rem auto;
             display: inline-block;
-            border: 1px solid rgba(255,255,255,0.3);
+            margin: 2rem auto;
+            padding: 2rem 3rem;
         }
 
         .event-details p {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 800;
             margin: 0.5rem 0;
-            color: white;
+            color: #fff;
         }
 
         .form-container {
-            background: white;
+            background: rgba(255,255,255,0.95); /* הטופס עצמו לבן כדי שיהיה קריא */
             border-radius: 20px;
             padding: 1rem;
-            margin: 2rem auto;
+            margin: 3rem auto;
             max-width: 800px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
 
         .btn-whatsapp {
             background: #25D366;
             color: white;
-            margin-top: 1rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            margin-top: 2rem;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
         }
 
         .btn-whatsapp:hover {
             background: #1ebd5a;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.3);
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .hero { padding: 9rem 1rem 5rem; clip-path: polygon(0 0, 100% 0, 100% 98%, 0 100%); }
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+            .hero { padding-top: 8rem; min-height: auto; }
             .hero-cta { flex-direction: column; }
-            .about-section { flex-direction: column; padding: 2rem; text-align: center; }
-            .step-card { flex-direction: column; text-align: center; gap: 1rem; padding: 1.5rem; border-right: none; border-top: 6px solid var(--accent-coral); }
-            .step-card:hover { transform: translateY(-5px); border-top-color: #4f46e5; }
+            .about-section { flex-direction: column; text-align: center; gap: 2rem; padding: 2rem; }
+            .step-card { flex-direction: column; text-align: center; gap: 1rem; padding: 2rem; }
+            .step-number { -webkit-text-stroke: 1px rgba(255,255,255,0.6); }
         }
     </style>
 </head>
@@ -376,20 +352,20 @@
         <nav>
             <div class="logo">מתנאל מלכה</div>
             <div>
-                <a href="#form" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 1rem;">שריון מקום למפגש</a>
+                <a href="#form" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 1rem;">שריון מקום</a>
             </div>
         </nav>
     </header>
 
     <main>
         <section class="hero">
-            <div class="hero-content">
+            <div>
                 <div class="urgency-badge">🚀 זה הזמן לעשות את הצעד</div>
                 <h1>זהו, אפשר לעבור לעסק משלכם.<br>או להקפיץ את הקיים.</h1>
                 <p class="subtitle">הדרך המהירה והשפויה לייצר לקוחות אמיתיים מהרשתות ב-2026. בלי הון עצמי, בלי לדעת קוד, ובלי להראות את הפנים למצלמה. רק אתם והבינה המלאכותית.</p>
                 <div class="hero-cta">
                     <a href="#form" class="btn btn-primary">🔥 שריינו מקום למפגש ב-3.3 (ללא עלות)</a>
-                    <a href="#real-talk" class="btn btn-white">איך זה בכלל אפשרי? 👇</a>
+                    <a href="#real-talk" class="btn btn-outline">איך זה בכלל אפשרי? 👇</a>
                 </div>
             </div>
         </section>
@@ -399,34 +375,34 @@
             <p class="section-subtitle">אם פעם הייתם צריכים אלפי שקלים וביטחון של כוכב קולנוע – היום הכללים השתנו.</p>
 
             <div class="problem-grid">
-                <div class="card">
+                <div class="glass-card">
                     <span class="card-icon">🙈</span>
                     <h3 class="card-title">אין צורך להצטלם</h3>
-                    <p>מפחדים מהמצלמה? לא נורא. נלמד איך המכונה מייצרת עבורכם סרטונים ממגנטים בלי שתצטרכו לדבר או להראות את הפנים.</p>
+                    <p class="text-muted">מפחדים מהמצלמה? לא נורא. נלמד איך המכונה מייצרת עבורכם סרטונים ממגנטים בלי שתצטרכו לדבר או להראות את הפנים.</p>
                 </div>
 
-                <div class="card">
+                <div class="glass-card">
                     <span class="card-icon">💰</span>
                     <h3 class="card-title">אין צורך בהון עצמי</h3>
-                    <p>לא צריך תקציבי עתק. רוב הכלים שנשתמש בהם כדי לייצר לקוחות הם חינמיים לחלוטין. הכסף נשאר אצלכם בכיס.</p>
+                    <p class="text-muted">לא צריך תקציבי עתק. רוב הכלים שנשתמש בהם כדי לייצר לקוחות הם חינמיים לחלוטין. הכסף נשאר אצלכם בכיס.</p>
                 </div>
 
-                <div class="card">
+                <div class="glass-card">
                     <span class="card-icon">💻</span>
                     <h3 class="card-title">אפס ידע טכנולוגי</h3>
-                    <p>לא צריך לדעת שורת קוד אחת. אם אתם יודעים להפעיל מחשב, אתם תדעו לייצר דף נחיתה מקצועי לקליטת לידים (בחינם לכל החיים).</p>
+                    <p class="text-muted">לא צריך לדעת שורת קוד אחת. אם אתם יודעים להפעיל מחשב, אתם תדעו לייצר דף נחיתה מקצועי לקליטת לידים (בחינם לכל החיים).</p>
                 </div>
 
-                <div class="card">
+                <div class="glass-card">
                     <span class="card-icon">🧠</span>
                     <h3 class="card-title">הסוף למחסום הכתיבה</h3>
-                    <p>לא יודעים מה לפרסם? ה-AI חושבת בשבילכם. היא כותבת תסריטים ויראליים ופוסטים שמוכרים, אתם רק צריכים לאשר.</p>
+                    <p class="text-muted">לא יודעים מה לפרסם? ה-AI חושבת בשבילכם. היא כותבת תסריטים ויראליים ופוסטים שמוכרים, אתם רק צריכים לאשר.</p>
                 </div>
             </div>
         </section>
 
         <section id="about">
-            <div class="about-section">
+            <div class="glass-card about-section">
                 <div class="about-image">
                     <img src="https://res.cloudinary.com/dhkn7tjxq/image/upload/v1771885244/IMG_2163_iiwtbs.png" alt="מתנאל מלכה">
                 </div>
@@ -447,7 +423,7 @@
             <p class="section-subtitle">ב-5 מפגשי אונליין, אנחנו בונים יחד את מכונת הלקוחות שלכם</p>
 
             <div class="schedule-container">
-                <div class="step-card">
+                <div class="glass-card step-card">
                     <div class="step-number">01</div>
                     <div class="step-content">
                         <h4>תסריטים ויראליים שכותבים את עצמם</h4>
@@ -455,7 +431,7 @@
                     </div>
                 </div>
 
-                <div class="step-card">
+                <div class="glass-card step-card">
                     <div class="step-number">02</div>
                     <div class="step-content">
                         <h4>סרטונים "מהספה" (בלי להצטלם)</h4>
@@ -463,7 +439,7 @@
                     </div>
                 </div>
 
-                <div class="step-card">
+                <div class="glass-card step-card">
                     <div class="step-number">03</div>
                     <div class="step-content">
                         <h4>הבית הדיגיטלי שלכם (בחינם)</h4>
@@ -471,7 +447,7 @@
                     </div>
                 </div>
 
-                <div class="step-card">
+                <div class="glass-card step-card">
                     <div class="step-number">04</div>
                     <div class="step-content">
                         <h4>שיווק חכם בלי לשלם לקמפיינר</h4>
@@ -479,7 +455,7 @@
                     </div>
                 </div>
 
-                <div class="step-card">
+                <div class="glass-card step-card">
                     <div class="step-number">05</div>
                     <div class="step-content">
                         <h4>שירות לקוחות אוטומטי בוואטסאפ</h4>
@@ -489,12 +465,12 @@
             </div>
         </section>
 
-        <section id="form" style="padding: 0;">
-            <div class="final-cta">
+        <section id="form">
+            <div class="glass-card final-cta">
                 <h2>מוכנים לעשות את הצעד הראשון?</h2>
-                <p class="section-subtitle" style="color: rgba(255,255,255,0.9); margin-bottom: 2rem;">השאירו פרטים ונשריין לכם מקום במפגש החשיפה</p>
+                <p class="section-subtitle" style="margin-bottom: 1rem;">השאירו פרטים ונשריין לכם מקום במפגש החשיפה</p>
 
-                <div class="event-details">
+                <div class="glass-card event-details" style="background: rgba(0,0,0,0.2);">
                     <p>📅 מתי: יום שלישי, 3.3.2026</p>
                     <p>⏰ שעה: 20:30 בערב</p>
                     <p>💻 איפה: אונליין (ללא עלות)</p>
@@ -516,8 +492,8 @@
                     <script>window.jotformEmbedHandler("iframe[id='JotFormIFrame-260535875927066']", "https://form.jotform.com/")</script>
                 </div>
 
-                <div style="margin-top: 2rem;">
-                    <a href="https://wa.link/9jo3zq" target="_blank" class="btn btn-whatsapp">
+                <div>
+                    <a href="https://wa.link/9jo3zq" target="_blank" class="btn btn-whatsapp btn-large">
                         💬 מעדיפים לדבר איתי קודם? לחצו לווטסאפ
                     </a>
                 </div>
@@ -525,9 +501,9 @@
         </section>
     </main>
 
-    <footer style="text-align: center; padding: 2rem; background: var(--text-dark); color: white;">
-        <div class="logo" style="margin-bottom: 0.5rem; justify-content: center; color: white;">מתנאל מלכה</div>
-        <p style="opacity: 0.7;">© 2026 כל הזכויות שמורות.</p>
+    <footer style="text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 4rem;">
+        <div class="logo" style="margin-bottom: 0.5rem; justify-content: center;">מתנאל מלכה</div>
+        <p style="color: rgba(255,255,255,0.5);">© 2026 כל הזכויות שמורות.</p>
     </footer>
 
 </body>
