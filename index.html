@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>מייצרים לקוחות לעסק | מתנאל מלכה</title>
-    <meta name="description" content="הגיע הרגע לעבור לעסק משלכם או להקפיץ את העסק הקיים. למדו איך לייצר לקוחות מהרשתות בקלות.">
+    <title>בינה מלאכותית זה פשוט | מתנאל מלכה</title>
+    <meta name="description" content="לייצר לקוחות בעידן הבינה המלאכותית מעולם לא היה פשוט יותר. הירשמו למפגש הקרוב ללא עלות.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,15 +78,6 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-        }
-
-        .logo::before {
-            content: '';
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background-color: var(--accent-yellow);
-            border-radius: 50%;
         }
 
         /* כפתורים אלגנטיים ולא מסנוורים */
@@ -356,6 +347,29 @@
             color: var(--text-dark);
         }
 
+        /* למה דווקא עכשיו - עיצוב תואם למותג החדש */
+        .why-now-section {
+            background-color: var(--accent-yellow-light);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            text-align: center;
+            max-width: 1000px;
+            margin: 4rem auto 0;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+        
+        .why-now-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .why-now-section p {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
         /* קריאה לפעולה סופית - מעוצב כבלוק בולט אבל נעים */
         .final-cta {
             background-color: var(--accent-green);
@@ -421,16 +435,18 @@
             .hero { padding: 8rem 1rem 4rem; }
             .hero-cta { flex-direction: column; }
             .about-section { flex-direction: column; padding: 2rem; text-align: center; }
+            .why-now-section { padding: 3rem 1.5rem; margin-top: 2rem; }
             .step-card { flex-direction: column; text-align: center; gap: 1rem; padding: 1.5rem; border-right: none; border-top: 6px solid var(--accent-yellow); }
             .step-card:hover { transform: translateY(-5px); border-top-color: var(--accent-green); }
             .final-cta { border-radius: 0; padding: 4rem 1rem; margin-top: 2rem; }
+            .event-details { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
     <header>
         <nav>
-            <div class="logo">מתנאל מלכה</div>
+            <div class="logo">🤖 בינה מלאכותית זה פשוט</div>
             <div>
                 <a href="#form" class="btn btn-primary" style="padding: 0.5rem 1.2rem; font-size: 1rem;">שריון מקום למפגש</a>
             </div>
@@ -440,43 +456,43 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <div class="urgency-badge">ההזדמנות שלכם ב-2026</div>
-                <h1>זהו, אפשר לעבור לעסק משלכם.<br><span>או להקפיץ את הקיים.</span></h1>
-                <p class="subtitle">הדרך המהירה והשפויה לייצר לקוחות אמיתיים מהרשתות. בלי הון עצמי, בלי לדעת קוד, ובלי להראות את הפנים למצלמה. רק אתם והבינה המלאכותית.</p>
+                <div class="urgency-badge">🚀 ההזדמנות של 2026 כאן</div>
+                <h1>לייצר לקוחות בעידן הבינה המלאכותית<br><span>מעולם לא היה פשוט יותר.</span></h1>
+                <p class="subtitle">בלי להצטלם, בלי הון עצמי ראשוני ובלי להבין בקוד. רק אתם, המחשב הנייד והבינה המלאכותית. הצטרפו אלינו למפגש חשיפה ללא עלות.</p>
                 <div class="hero-cta">
-                    <a href="#form" class="btn btn-primary">שריינו מקום למפגש (ללא עלות)</a>
-                    <a href="#real-talk" class="btn btn-outline">איך זה בכלל אפשרי? 👇</a>
+                    <a href="#form" class="btn btn-primary">🔥 אני רוצה לשריין מקום ל-3.3</a>
+                    <a href="#real-talk" class="btn btn-outline">👇 בואו נדבר תכלס</a>
                 </div>
             </div>
         </section>
 
         <section id="real-talk">
-            <h2>זה כבר לא מסובך כמו פעם.</h2>
-            <p class="section-subtitle">אם פעם הייתם צריכים אלפי שקלים וביטחון של כוכב קולנוע – היום הכללים השתנו.</p>
+            <h2>זה נשמע "טוב מדי"? בואו נדבר תכלס:</h2>
+            <p class="section-subtitle">העולם השתנה. אם פעם הייתם צריכים תקציבי עתק וביטחון של כוכב קולנוע - היום ה-AI סוגר לכם את הפינות.</p>
 
             <div class="problem-grid">
                 <div class="card">
                     <span class="card-icon">🙈</span>
-                    <h3 class="card-title">אין צורך להצטלם</h3>
-                    <p class="text-muted">מפחדים מהמצלמה? לא נורא. נלמד איך המכונה מייצרת עבורכם סרטונים ממגנטים בלי שתצטרכו לדבר או להראות את הפנים.</p>
+                    <h3 class="card-title">לא רוצים להצטלם?</h3>
+                    <p class="text-muted">אתם לא צריכים. הבינה המלאכותית מייצרת עבורכם סרטונים ממגנטים בלי שתצטרכו להראות את הפנים אפילו פעם אחת או לדבר למצלמה.</p>
                 </div>
 
                 <div class="card">
-                    <span class="card-icon">💰</span>
-                    <h3 class="card-title">אין צורך בהון עצמי</h3>
-                    <p class="text-muted">לא צריך תקציבי עתק. רוב הכלים שנשתמש בהם כדי לייצר לקוחות הם חינמיים לחלוטין. הכסף נשאר אצלכם בכיס.</p>
+                    <span class="card-icon">💸</span>
+                    <h3 class="card-title">אין תקציב שיווק?</h3>
+                    <p class="text-muted">אתם לא צריכים הון ראשוני. רוב הכלים שנשתמש בהם לייצור לקוחות מהרשתות הם חינמיים לגמרי. תשאירו את הכסף בכיס.</p>
                 </div>
 
                 <div class="card">
-                    <span class="card-icon">💻</span>
-                    <h3 class="card-title">אפס ידע טכנולוגי</h3>
-                    <p class="text-muted">לא צריך לדעת שורת קוד אחת. אם אתם יודעים להפעיל מחשב, אתם תדעו לייצר דף נחיתה מקצועי לקליטת לידים (בחינם לכל החיים).</p>
+                    <span class="card-icon">👴👶</span>
+                    <h3 class="card-title">מיועד רק לגיקים?</h3>
+                    <p class="text-muted">ממש לא. הבינה המלאכותית נוצרה בשביל אנשים רגילים. הממשקים היום כל כך ידידותיים שגם ילדה בת 11 וגם סבא רבא שלה יכולים להשתמש בהם.</p>
                 </div>
 
                 <div class="card">
-                    <span class="card-icon">🧠</span>
-                    <h3 class="card-title">הסוף למחסום הכתיבה</h3>
-                    <p class="text-muted">לא יודעים מה לפרסם? ה-AI חושבת בשבילכם. היא כותבת תסריטים ויראליים ופוסטים שמוכרים, אתם רק צריכים לאשר.</p>
+                    <span class="card-icon">🤯</span>
+                    <h3 class="card-title">מחסום כתיבה לתוכן?</h3>
+                    <p class="text-muted">מעולה, תנו למכונה לשבור את הראש. ה-AI חושבת בשבילכם על רעיונות, כותבת תסריטים ויראליים ופוסטים שמוכרים.</p>
                 </div>
             </div>
         </section>
@@ -489,32 +505,32 @@
                 <div class="about-content">
                     <h3>נעים מאוד, אני מתנאל (ואני לא גאון מחשבים)</h3>
                     <p class="about-text">
-                        אני רוצה להגיד לכם משהו בכנות: אני לא האדם הכי טכנולוגי שתפגשו, אין לי מאות אלפי עוקבים, ואין לי "כישרון מולד" לשיווק. <strong>אבל מצאתי שיטה שעובדת.</strong>
+                        אני לא האדם הכי טכנולוגי שתפגשו. אין לי מאות אלפי עוקבים ואני לא חושב שאני חכם יותר מכל אחד אחר. <strong>אבל מצאתי שיטה.</strong>
                     </p>
                     <p class="about-text">
-                        הבנתי שהמטרה היא לא "ללמוד בינה מלאכותית" – המטרה היא <strong>לייצר לקוחות</strong>. מי שידע לרתום את הכלים הפשוטים ביותר שיש היום, יוכל להשתחרר מעולם השכירים, לבנות את העסק שהוא תמיד חלם עליו, או להביא זרם לקוחות חדש לעסק שכבר קיים. אני כאן כדי להראות לכם את הדרך הקצרה ביותר לעשות את זה.
+                        הבנתי שבשנת 2026, הבינה המלאכותית הגיעה לנקודת הבשלה קריטית. מי שיודע לרתום אותה עכשיו – ירוויח ובגדול. אני לא פה כדי ללמד אתכם "תיאוריות על AI", אלא להראות לכם תכלס את המינימום שצריך כדי לייצר לקוחות מהרשתות, בלי להתפזר ובלי לסבך דברים.
                     </p>
                 </div>
             </div>
         </section>
 
         <section id="method">
-            <h2>איך זה עובד בפועל?</h2>
-            <p class="section-subtitle">ב-5 מפגשי אונליין, אנחנו בונים יחד את מכונת הלקוחות שלכם</p>
+            <h2>איך זה עובד? השיטה ב-5 שלבים:</h2>
+            <p class="section-subtitle">ב-5 מפגשי אונליין ממוקדים (בליווי אישי), אתם הופכים למכונת שיווק עצמאית:</p>
 
             <div class="schedule-container">
                 <div class="step-card">
                     <div class="step-number">01</div>
                     <div class="step-content">
-                        <h4>תסריטים ויראליים שכותבים את עצמם</h4>
-                        <p class="text-muted">ה-AI כותבת את הפוסטים והתסריטים שמביאים לידים. אתם רק עוברים על זה ומאשרים.</p>
+                        <h4>📝 תסריטים ויראליים שכותבים את עצמם</h4>
+                        <p class="text-muted">ה-AI כותבת את הפוסטים, הרעיונות והתסריטים. אתם רק עוברים על זה ומאשרים. בלי מחסומי כתיבה.</p>
                     </div>
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">02</div>
                     <div class="step-content">
-                        <h4>סרטונים "מהספה" (בלי להצטלם)</h4>
+                        <h4>🛋️ סרטונים "מהספה" (בלי להצטלם)</h4>
                         <p class="text-muted">יצירת תוכן וידאו ממגנט לרשתות החברתיות בלי לפתוח מצלמה, בלי תאורה ובלי להקליט קול.</p>
                     </div>
                 </div>
@@ -522,38 +538,43 @@
                 <div class="step-card">
                     <div class="step-number">03</div>
                     <div class="step-content">
-                        <h4>הבית הדיגיטלי שלכם (בחינם)</h4>
-                        <p class="text-muted">בניית דף נחיתה מקצועי לקליטת הלקוחות - ללא קוד וללא עלות תחזוקה חודשית.</p>
+                        <h4>🏠 הבית הדיגיטלי שלכם בחינם</h4>
+                        <p class="text-muted">בניית דף נחיתה מקצועי לקליטת הלידים - ללא קוד וללא עלות תחזוקה. מערכת חינמית לכל החיים.</p>
                     </div>
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">04</div>
                     <div class="step-content">
-                        <h4>שיווק חכם בלי לשלם לקמפיינר</h4>
-                        <p class="text-muted">איך להרים קמפיין ממומן שהבינה המלאכותית מנהלת עבורכם. חוסכים המון כסף על סוכנויות.</p>
+                        <h4>🎯 שיווק חכם בלי קמפיינר</h4>
+                        <p class="text-muted">איך להרים קמפיין ממומן שהבינה המלאכותית בונה עבורו את הקהל וכותבת את הקופי. חוסכים אלפי שקלים על סוכנויות.</p>
                     </div>
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">05</div>
                     <div class="step-content">
-                        <h4>שירות לקוחות אוטומטי בוואטסאפ</h4>
-                        <p class="text-muted">מערכת חינמית שתענה למתעניינים שלכם בוואטסאפ ותחמם אותם לעסקה 24/7.</p>
+                        <h4>🤖 שירות לקוחות ואוטומציות</h4>
+                        <p class="text-muted">המערכת שתענה למתעניינים שלכם בוואטסאפ ותחמם עבורכם את הלידים 24/7, הכל על אוטומט.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="form" style="padding-bottom: 0;">
+        <section class="why-now-section">
+            <h2>למה דווקא עכשיו?</h2>
+            <p>אנחנו נמצאים בחלון הזדמנויות היסטורי. הבינה המלאכותית של 2026 היא כבר לא צעצוע ולא טרנד חולף – היא כוח עבודה של ממש. מי שישתהה עכשיו, ימצא את עצמו מאחור מתחרה באנשים שעושים פי 10 פחות מאמץ. מי שיכנס עכשיו – יבנה עסק שמתנהל בקלות וברווחיות.</p>
+        </section>
+
+        <section id="form" style="padding-bottom: 0; padding-top: 0;">
             <div class="final-cta">
                 <h2>מוכנים לעשות את הצעד הראשון?</h2>
-                <p class="section-subtitle">השאירו פרטים ונשריין לכם מקום במפגש החשיפה</p>
+                <p class="section-subtitle">השאירו פרטים כאן למטה ונשריין לכם מקום למפגש הקרוב:</p>
 
                 <div class="event-details">
                     <p>📅 מתי: יום שלישי, 3.3.2026</p>
                     <p>⏰ שעה: 20:30 בערב</p>
-                    <p>💻 איפה: אונליין (ללא עלות)</p>
+                    <p>💻 איפה: אונליין, מהמחשב הנייד שלכם (ללא עלות)</p>
                 </div>
 
                 <div class="form-container">
@@ -574,7 +595,7 @@
 
                 <div>
                     <a href="https://wa.link/9jo3zq" target="_blank" class="btn btn-whatsapp">
-                        מעדיפים לדבר איתי קודם? לחצו לווטסאפ
+                        יש לכם שאלות? דברו איתי בווטסאפ
                     </a>
                 </div>
             </div>
@@ -582,8 +603,8 @@
     </main>
 
     <footer style="text-align: center; padding: 2rem; color: var(--text-muted); background-color: var(--bg-main);">
-        <div class="logo" style="margin-bottom: 0.5rem; justify-content: center;">מתנאל מלכה</div>
-        <p>© 2026 כל הזכויות שמורות.</p>
+        <div class="logo" style="margin-bottom: 0.5rem; justify-content: center;">🤖 בינה מלאכותית זה פשוט</div>
+        <p>© 2026 מתנאל מלכה. כל הזכויות שמורות.</p>
     </footer>
 
 </body>
